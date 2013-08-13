@@ -12,11 +12,23 @@ branches:
 # checkout settings
 before_install: 
   - "git clone -b master https://github.com/molindo/travis-settings.git target/travis-settings"
-  - "diff -wu ~/.m2/settings.xml target/travis-settings/defaultSettings.xml || ( cat ~/.m2/settings.xml && false )"
+  - "target/travis-settings/tasks/before_install.sh"
 
 # install and deploy
-install: "mvn --settings=target/travis-settings/settings.xml -B -DskipTests=true install"
-script:  "mvn --settings=target/travis-settings/settings.xml -B clean deploy"
+install: "target/travis-settings/tasks/install.sh"
+script:  "target/travis-settings/tasks/script.sh"
+
+# travis encrypt 'token@room'
+notifications:
+  email: false
+  hipchat: 
+    rooms:
+      - secure: "fehcwcG4g3ifm3XzGYfhHLQE4EE3mWhkp5zyt3eNPTNYfsmubyR8c2MpK+EFn1dXknsiuAtqbJdO2QHvH7jceIa3dQ+ge6+f7eUvO22aFJBj3nrJuRSc38CuxSBJpmmwLinVEYVpTqTJuSxmJ7+HCRqtZwaQkpeW0NHAe39s9KE="
+    template:
+      - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message} (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Change view</a>)'
+    format: html
+    on_success: always
+    on_failure: always
 
 # travis encrypt 'CI_DEPLOY_USERNAME=username'
 # travis encrypt 'CI_DEPLOY_PASSWORD=password'
@@ -24,8 +36,8 @@ script:  "mvn --settings=target/travis-settings/settings.xml -B clean deploy"
 # travis encrypt 'AMAZON_SECRET=secret'
 env:
   global:
-    - secure: "l+zhmg/WyewOby7+9hgfaTKaN/uTu0pOt5q8g8Xu1ENHM83f6Lda0Z69FzYpQU1ZBG9PjcCBuoCQfjrd+0731lGd8lv23t87SUviJSr89v9MGXVkXcq6LYcu0xxZCxJM+lPX9jku5sxiLigYAKNHyx1hs5cV6VxQ9FiAYYLX8aE="
-    - secure: "Cy9tFb7Gkho/oQo2bqXUkIlEjg/ua3c59bR2J1UnvzPPvz2lFCd1Dbj43oF6yKK6ZsFOODgzhkMX0EMqRLAw/o4l2iXm7RaMtPcAwtxRERgOuAwE6A1hijIV2pAjpppFnB/qY5/iuJ+rSLUL77zgv9OMYTEbq+MfJ5PvFMJeofc="
-    - secure: "FbiPdY8UK4D2ldntnY7GTjzyAwYOhUFQqihXjYR5ViQsImojVlk8CK4EZ6L7Qd/2Gdg8iYrJBg3fin0kAluejzA68fvDcFS8M9NlojDGcAfb2rHUcOW8wyT50poEjLXmvjX2WerOlayIZB9OBkZL5nC6zZoKh/xgTbFbWAK0BD8="
-    - secure: "SMkzUr0Jaw5dVzrNXiazNTtFUHKSa0Y5lxH3JcZMjZhUlzV/TmXQ5N3JeX2TVtVu2ZXCGJWJuA5tXoZGYjElgEpcUOxQGJVHwLwTuI/B39Gl/Sr+MroWUWQx+kjUjX2jpcXppylxr3UXSlBuFFHCUHXNSL6rzN9llKhB63puYM4="
+    - secure: "GcO+8wr6dOrtUKweW9dJj1n8UA8+X6FcDwGvqiLKRnYmmeYWTTnqZi44forqXUK1gZPdEPg9bNoLpMGdZfXYryesaNjmt5JYLSK9gvjAJx5/cR8C4D1fcvdwZ5pKlB+t1hu5XBXxXIFbYhY3HwB7b9hSJJ8pvXRoSvzJH0GXTW4="
+    - secure: "F/KxdplGKcYi0kZZ+9i7vehJZD05KG0SStnv6ROUA4pVIg0GtmY5tpk6LuZ8e/mlJxToOHF5Y/KRlHWYqnmuigDaBOTqI28wnO2SonWPoNYlHPToj6WFXbz3Gbl1aB6c05luiQ4jZ/I1jAoIYp13NLKJ5x0x8iPspfOWNVYlYqo="
+    - secure: "FbiPdY8UK4D2ldntnY7GTjzyAwYOhUFQqihXjYR5ViQsImojVlk8CK4EZ6L7Qd/2Gdg8iYrJBg3fin0kAluejzA68fvDcFS8M9NlojDGcAfb2rHUcOW8wyT50poEjLXmvjX2WerOlayIZB9OBkZL5nC6zZoKh/xgT
+    - secure: "SMkzUr0Jaw5dVzrNXiazNTtFUHKSa0Y5lxH3JcZMjZhUlzV/TmXQ5N3JeX2TVtVu2ZXCGJWJuA5tXoZGYjElgEpcUOxQGJVHwLwTuI/B39Gl/Sr+MroWUWQx+kjUjX2jpcXppylxr3UXSlBuFFHCUHXNSL6rzN9ll
 
