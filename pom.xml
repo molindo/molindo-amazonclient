@@ -32,6 +32,20 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+
+	<profiles>
+		<profile>
+			<id>secret-from-env</id>
+			<activation>
+				<property>
+					<name>env.AMAZON_SECRET</name>
+				</property>
+			</activation>
+			<properties>
+				<at.molindo.amazonclient.secret>${env.AMAZON_SECRET}</at.molindo.amazonclient.secret>
+			</properties>
+		</profile>
+	</profiles>
 	
 	<build>
 		<pluginManagement>
@@ -89,6 +103,15 @@
 					<sourceDestDir>${basedir}/target/generated/src/main/java</sourceDestDir>
 					<target>2.1</target>
 				</configuration>
+			</plugin>
+			<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.15</version>
+					<configuration>
+						<systemPropertyVariables>
+							<at.molindo.amazonclient.secret>${at.molindo.amazonclient.secret}</at.molindo.amazonclient.secret>
+						</systemPropertyVariables>
+					</configuration>
 			</plugin>
 		</plugins>
 	</build>
