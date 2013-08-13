@@ -34,14 +34,17 @@ import com.amazon.webservices.awsecommerceservice.Items;
 
 public class ECommerceServiceTest {
 
-	private static final String SECRET_PROPERTY = "at.molindo.amazonclient.secret";
-
 	private static final Logger log = LoggerFactory.getLogger(ECommerceServiceTest.class);
 
+	public static final String KEY_PROPERTY = "at.molindo.amazonclient.key";
+	public static final String SECRET_PROPERTY = "at.molindo.amazonclient.secret";
+
+	private static final String KEY = System.getProperty(KEY_PROPERTY);
 	private static final String SECRET = System.getProperty(SECRET_PROPERTY);
 
 	@Before
 	public void assertSecret() {
+		Assert.assertNotNull("amazon key missing (set system property " + KEY_PROPERTY + ")", KEY);
 		Assert.assertNotNull("amazon secret missing (set system property " + SECRET_PROPERTY + ")", SECRET);
 	}
 
@@ -106,8 +109,7 @@ public class ECommerceServiceTest {
 
 		final ItemSearch itemSearch = new ItemSearch();
 		itemSearch.getRequest().add(itemSearchRequest);
-		itemSearch.setAWSAccessKeyId("1Y27MNKB3WCJ6MBG4QG2");
-		itemSearch.setAssociateTag("poptippcom-21");
+		itemSearch.setAWSAccessKeyId(KEY);
 		return itemSearch;
 	}
 

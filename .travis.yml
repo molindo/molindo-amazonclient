@@ -20,10 +20,12 @@ script:  "mvn --settings=target/travis-settings/settings.xml -B clean deploy"
 
 # travis encrypt 'CI_DEPLOY_USERNAME=username'
 # travis encrypt 'CI_DEPLOY_PASSWORD=password'
+# travis encrypt 'AMAZON_KEY=key'
 # travis encrypt 'AMAZON_SECRET=secret'
 env:
   global:
     - secure: "l+zhmg/WyewOby7+9hgfaTKaN/uTu0pOt5q8g8Xu1ENHM83f6Lda0Z69FzYpQU1ZBG9PjcCBuoCQfjrd+0731lGd8lv23t87SUviJSr89v9MGXVkXcq6LYcu0xxZCxJM+lPX9jku5sxiLigYAKNHyx1hs5cV6VxQ9FiAYYLX8aE="
     - secure: "Cy9tFb7Gkho/oQo2bqXUkIlEjg/ua3c59bR2J1UnvzPPvz2lFCd1Dbj43oF6yKK6ZsFOODgzhkMX0EMqRLAw/o4l2iXm7RaMtPcAwtxRERgOuAwE6A1hijIV2pAjpppFnB/qY5/iuJ+rSLUL77zgv9OMYTEbq+MfJ5PvFMJeofc="
+    - secure: "FbiPdY8UK4D2ldntnY7GTjzyAwYOhUFQqihXjYR5ViQsImojVlk8CK4EZ6L7Qd/2Gdg8iYrJBg3fin0kAluejzA68fvDcFS8M9NlojDGcAfb2rHUcOW8wyT50poEjLXmvjX2WerOlayIZB9OBkZL5nC6zZoKh/xgTbFbWAK0BD8="
     - secure: "SMkzUr0Jaw5dVzrNXiazNTtFUHKSa0Y5lxH3JcZMjZhUlzV/TmXQ5N3JeX2TVtVu2ZXCGJWJuA5tXoZGYjElgEpcUOxQGJVHwLwTuI/B39Gl/Sr+MroWUWQx+kjUjX2jpcXppylxr3UXSlBuFFHCUHXNSL6rzN9llKhB63puYM4="
 

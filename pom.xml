@@ -35,6 +35,17 @@
 
 	<profiles>
 		<profile>
+			<id>key-from-env</id>
+			<activation>
+				<property>
+					<name>env.AMAZON_KEY</name>
+				</property>
+			</activation>
+			<properties>
+				<at.molindo.amazonclient.key>${env.AMAZON_KEY}</at.molindo.amazonclient.key>
+			</properties>
+		</profile>
+		<profile>
 			<id>secret-from-env</id>
 			<activation>
 				<property>
@@ -109,6 +120,7 @@
 					<version>2.15</version>
 					<configuration>
 						<systemPropertyVariables>
+							<at.molindo.amazonclient.key>${at.molindo.amazonclient.key}</at.molindo.amazonclient.key>
 							<at.molindo.amazonclient.secret>${at.molindo.amazonclient.secret}</at.molindo.amazonclient.secret>
 						</systemPropertyVariables>
 					</configuration>
